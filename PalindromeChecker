@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+bool palindrome(string word);
+
+int main(){
+	string word;
+	cout << "Enter a word: " << word;
+	cin >> word;
+
+    if (palindrome(word) == true)
+        cout << "word is a palindrome!" << endl;
+    else
+        cout << "word is not a palindrome..." << endl;
+
+		system("pause");
+		return 0;
+}
+
+bool palindrome(string word)
+{
+    int length = word.length();
+
+    string first = word.substr(0,1);
+    string last = word.substr((length - 1), 1);
+
+    if (first == last)
+    {
+        word = word.substr((0 + 1), (length - 2));
+
+		if (word.length() <= 1) return true;  
+		return palindrome(word);   
+	}
+		else
+		  return false;
+}
