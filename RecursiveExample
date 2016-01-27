@@ -1,0 +1,24 @@
+// This program demonstrates a simple recursive function.
+#include <iostream>
+using namespace std;
+
+// Function prototype
+void message(int);
+
+int main()
+{
+   message(10);
+
+   system("pause");
+   return 0;
+}
+
+void message(int n)
+{
+   if (n > 0)
+   {
+      cout << "Markov " << n << endl;
+      message(n - 1);
+   }
+}
+
