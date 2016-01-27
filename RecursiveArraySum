@@ -1,0 +1,24 @@
+
+#include <iostream>
+using namespace std;
+// Function prototype
+int sum(int [], int); 
+int main()
+{
+  	const int n = 4; //constant for the array size 
+	int array[n] = {10, 10, 10, 10}; 
+	int total; 
+	
+	total = sum(array, n); 
+	cout << total << endl;
+   system("pause");
+   return 0;
+}
+int sum(int array[], int size) 
+{ 
+	if (size <= 0) 
+	return 0; 
+		else 
+	return array[size-1] + sum(array, size - 1); 
+} 
+
