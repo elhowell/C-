@@ -1,0 +1,44 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct stock
+{
+string name;
+float price1;
+float price2;
+float change;
+
+};
+
+
+int main()
+{
+	int i =0;
+	cout << "How many stocks will you enter? " << endl;
+	cin >> stocknum;
+
+	vector<stock> stocknum;
+	
+cout << stocknum;
+
+	for (int j=0; j<=i; j++){
+		cout << "enter the first thing plz: " << endl;
+		cin >> stocks[j].name;
+		cout << "enter the price thing plz: " << endl;
+		cin >> stocks[j].price1;
+
+	}
+
+	
+
+system("pause");
+return 0;
+
+}
+
+
+
