@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Rectangle
+	{
+		double length;
+		double width;
+		double area;
+		double perimeter;
+	};
+
+
+
+int main(){
+	Rectangle r1;
+	cout << "Enter the Length ";
+	cin >> r1.length;
+	cout << "Enter the Width ";
+	cin >> r1.width;
+
+	r1.area = r1.length*r1.width;
+	r1.perimeter = r1.length*2+r1.width*2;
+
+	cout << " The length is: " <<  r1.length << endl;
+	cout << " The width is: " << r1.width << endl;
+	cout << " The area is: " << r1.area << endl;
+	cout << " The perimeter is: " << r1.perimeter << endl;
+
+	if(r1.width==r1.length){
+		cout << "This rectangle is a square! " << endl;
+		}
+	else
+		cout << "This aint no square! " << endl;
+
+	system("pause");
+	return 0;
+}
+
