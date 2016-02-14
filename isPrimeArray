@@ -1,0 +1,61 @@
+
+#include <iostream>
+using namespace std;
+
+void isPrimeArray(int Numbers[], int length, char primes[]);
+bool isPrime(int numbers);
+
+int main ()
+{
+	const int length=5;
+	char primes[length];
+
+
+	int Numbers[length]={2,4,6,7,10};
+	isPrimeArray(Numbers,length,primes);
+
+	int i=0;
+	do
+	{
+		cout << primes[i] << ' ' ;
+		i++;
+	}while (i < length);
+
+	cout << endl;
+
+system("pause");
+return 0;
+}
+
+void isPrimeArray(int Numbers[], int length, char primes[])
+{
+	int i=0;
+	do
+	{
+		if(isPrime(Numbers[i])==true)
+			primes[i]='T';
+		else
+		primes[i]='F';
+		i++;
+	}while(i< length);
+}
+
+//Function 2
+
+bool isPrime(int number){
+	int i=1;
+	int count=0;
+
+do 
+{
+	if( (number%i) ==0)
+			count ++;
+		i++;
+	}while(i <=number);
+
+	if(count==2)
+		return true;
+	else
+		return false;
+}
+
