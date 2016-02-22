@@ -1,0 +1,127 @@
+//Evan Howell Queue Demostration
+
+#include <iostream>
+
+using namespace std;
+
+class Queue{
+int* A;
+int front;
+int end;
+public:
+
+Queue(){
+front = -1;
+end = -1;
+A = new int[8];
+
+}
+
+void enqueue(int N){
+
+if(isEmpty()){
+
+A[0]=N;
+front = 0;
+end = 0;
+
+}
+
+ 
+else if(isFull()){
+cout<<"Overflow condition!!!"<<endl;
+cout<<"Queue is already full.Cannot add more elements to the Queue"<<endl;
+
+}
+
+else{
+A[++end]=N;
+}
+}
+
+int dequeue(){
+
+int frontElement=-1;
+
+if(isEmpty()){
+cout<<"Underflow condition!!!"<<endl;
+cout<<"Queue is already empty.";
+cout<<"Cannot remove any more elements from the Queue"<<endl;
+
+}
+
+ 
+else{
+
+frontElement = A[front];
+
+int i;
+for(i=0;i<end;i++){
+A[i]=A[i+1];
+
+}
+
+end--;
+}
+
+return frontElement;
+}
+
+int getFront(){
+return A[front];
+}
+
+void displayFront(){
+cout<<A[front]<<endl;
+}
+
+bool isEmpty(){
+
+if(end == -1) return true;
+else return false;
+}
+
+bool isFull(){
+
+if(end == 7) return true;
+
+else return false;
+}
+};
+
+
+
+int main()
+
+{
+
+
+Queue Q;
+Q.enqueue(10);//Add 10
+Q.enqueue(20);//Add 20
+Q.enqueue(30);//Add 30
+Q.enqueue(40);//Add 40
+Q.displayFront();//Display Front
+Q.dequeue();//Remove
+Q.enqueue(50);//Add 50
+Q.enqueue(60);//Add 60
+Q.enqueue(70);//Add 70
+Q.enqueue(80);//Add 80
+Q.enqueue(90);//Add 90
+Q.enqueue(100);//Add 100
+Q.displayFront();//Display Front
+Q.dequeue();//Remove
+Q.displayFront();//Display Front
+Q.dequeue();//Remove
+Q.displayFront();//Display Front
+Q.dequeue();//Remove
+Q.enqueue(110);//Add 110
+Q.displayFront();//Display Front
+Q.dequeue();//Remove
+Q.displayFront();//Display Front
+Q.dequeue();//Remove
+Q.displayFront();//Display Front
+return 0;
+
+}
+
