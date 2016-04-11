@@ -1,0 +1,539 @@
+using namespace std;
+
+#include<iostream> 
+#include<vector> 
+#include<stack> 
+
+struct node
+
+{
+
+	int data;
+	node*left;
+	node*right;
+
+}*root, *start, *parent;
+
+class BST
+
+{
+
+public:
+
+	//create node
+
+	node*create(int k)
+
+	{
+
+		node*mynode = new node;
+
+		mynode->data = k;
+
+		mynode->left = NULL;
+
+		mynode->right = NULL;
+
+		return mynode;
+
+	}
+
+	void inorder(node*p)
+
+	{
+
+		if (p != NULL)
+
+		{
+
+			inorder(p->left);
+
+			cout << p->data << " ";
+
+			inorder(p->right);
+
+		}
+
+		else
+
+			return;
+
+	}
+
+	void find(node*Node)
+
+	{
+
+		if (start == NULL)
+
+		{
+
+			root = Node;
+
+			start = root;
+
+		}
+
+		else if (Node->data > root->data)
+
+		{
+
+			if (root->right == NULL)
+
+			{
+
+				root->right = Node;
+
+				root = start;
+
+			}
+
+			else
+
+			{
+
+				root = root->right;
+
+				find(Node);
+
+			}
+
+		}
+
+		else if (Node->data <= root->data)
+
+		{
+
+			if (root->left == NULL)
+
+			{
+
+				root->left = Node;
+
+				root = start;
+
+			}
+
+			else
+
+			{
+
+				root = root->left;
+
+				find(Node);
+
+			}
+
+		}
+
+	}
+
+	void buildtree(int arr[], int n)
+
+	{
+
+		int i;
+
+		node*Node;
+
+		root = NULL;
+
+		start = NULL;
+
+		for (i = 0; i<n; i++)
+
+		{
+
+			Node = create(arr[i]);
+
+			find(Node);
+
+		}
+
+
+
+	}
+
+	node* search(int key, node*var)
+
+	{
+
+		//cout<<key<<var->data<<endl;
+
+		if (var == NULL)
+
+			return NULL;
+
+		if (var->data > key)
+
+		{
+
+			return search(key, var->left);
+
+		}
+
+		else if (var->data < key)
+
+		{
+
+			return search(key, var->right);
+
+		}
+
+		else if (var->data == key)
+
+		{
+
+			//cout<<var->data<<endl;
+
+			return var;
+
+		}
+
+	}
+
+	node*find_min(node*N)
+
+	{
+
+		while (N->left != NULL)
+
+		{
+
+			N = N->left;
+
+		}
+
+		return N;
+
+	}
+
+	node*find_max(node*N)
+
+	{
+
+		while (N->right != NULL)
+
+		{
+
+			N = N->right;
+
+		}
+
+		return N;
+
+	}
+
+	node*find_par(node*M)
+
+	{
+
+		node*previous, *current;
+
+		previous = NULL;
+
+		current = root;
+
+		while (current != NULL && M->data != current->data)
+
+		{
+
+			if (M->data > current->data)
+
+			{
+
+				previous = current;
+
+				current = current->right;
+
+			}
+
+			else if (M->data < current->data)
+
+			{
+
+				previous = current;
+
+				current = current->left;
+
+			}
+
+		}
+
+		return previous;
+
+	}
+
+	node* successor(int k)
+
+	{
+
+		node*Node, *y;
+
+		Node = search(k, root);
+
+		if (Node != NULL && Node->right != NULL)
+
+		{
+
+			return find_min(Node->right);
+
+		}
+
+		y = find_par(Node);
+
+		while (y != NULL && Node != y->left)
+
+		{
+
+			Node = y;
+
+			y = find_par(Node);
+
+		}
+
+		if (y != NULL)
+
+			return y;
+
+		else
+
+			return NULL;
+
+	}
+
+	void insertion(node*N)
+
+	{
+
+		node*y, *x;
+
+		y = NULL;
+
+		x = root;
+
+		while (x != NULL)
+
+		{
+
+			y = x;
+
+			if (N->data > x->data)
+
+				x = x->right;
+
+			else
+
+				x = x->left;
+
+		}
+
+		if (N->data > y->data)
+
+			y->right = N;
+
+		else
+
+			y->left = N;
+
+	}
+
+	// deletion of an element
+
+	void deletion(int k)
+
+	{
+
+		node*x, *y, *s, *par;
+
+		x = root;
+
+		while (x != NULL)
+
+		{
+
+			if (k != x->data)
+
+				y = x;
+
+			if (x->data > k)
+
+				x = x->left;
+
+			else if (x->data < k)
+
+				x = x->right;
+
+			else
+
+				break;
+
+		}
+
+		if (x == NULL)
+
+		{
+
+			cout << "element is not present in the tree" << endl;
+
+			return;
+
+		}
+
+		else if (x->right == NULL && x->left == NULL)
+
+		{
+
+			if (k > y->data)
+
+			{
+
+				y->right = NULL;
+
+				delete x;
+
+				return;
+
+			}
+
+			if (k < y->data)
+
+			{
+
+				y->left = NULL;
+
+				delete x;
+
+				return;
+
+			}
+
+		}
+
+		else if (x->right == NULL || x->left == NULL)
+
+		{
+
+			if (k > y->data)
+
+			{
+
+				if (x->right != NULL)
+
+					y->right = x->right;
+
+				else
+
+					y->right = x->left;
+
+			}
+
+			else
+
+			{
+
+				if (x->right != NULL)
+
+					y->left = x->right;
+
+				else
+
+					y->left = x->left;
+
+			}
+
+			delete x;
+
+			return;
+
+		}
+
+		else
+
+		{
+
+			s = successor(k);
+
+			par = find_par(s);
+
+			x->data = s->data;
+
+			if (s == x->right)
+
+			{
+
+				x->right = s->right;
+
+				delete s;
+
+				return;
+
+			}
+
+			par->left = s->right;
+
+			delete s;
+
+			return;
+
+		}
+
+	}
+
+};
+
+int main()
+
+{
+
+	BST tree;
+
+	int arr[] = { 34, 24, 6, 12, 30, 88, 90, 42, 57, 102 };
+
+	cout << "Inserting values into tree. " << endl;
+
+	for (int i = 0; i<10; i++)
+
+		tree.buildtree(arr, 10);
+
+	cout << "The small integer is: " << (tree.find_min(root))->data << endl;
+
+	cout << "The largest integer is: " << (tree.find_max(root))->data << endl << endl;;
+
+	node * n = tree.search(100, root);
+
+	if (n == NULL)
+
+		cout << "100 is not in the tree." << endl;
+
+	else
+
+		cout << "100 is in the tree." << endl;
+
+	n = tree.search(88, root);
+
+	if (n == NULL)
+
+		cout << "88 is not in the tree." << endl;
+
+	else
+
+		cout << "88 is is in th tree." << endl << endl;
+
+	cout << "Inorder Traversal: " << endl;
+
+	tree.inorder(root);
+
+	cout << endl << endl;
+
+	tree.deletion(30);
+
+	cout << "30 is deleted." << endl;
+
+	cout << "Inorder Traversal:" << endl;
+
+	tree.inorder(root);
+
+	return 0;
+
+}
